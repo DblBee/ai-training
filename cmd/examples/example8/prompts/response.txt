@@ -1,0 +1,28 @@
+### Instructions:
+
+Your task is to look at the Data Records and provide an answer to the question.
+
+Adhere to these rules:
+
+-- Do not explain your answer.
+-- Do not provide the raw data.
+
+### Data:
+
+RECORD 1
+KEY: users_name, VAL: Luis Rodriguez
+KEY: users_roles, VAL: {admin}
+KEY: users_department, VAL: <nil>
+KEY: homes_type, VAL: single-family
+KEY: homes_address_1, VAL: 123 Main St
+KEY: homes_city, VAL: New York City
+KEY: homes_country, VAL: US
+KEY: users_id, VAL: 4bce0a9f-8e95-43f7-ba47-d3daeb5dbb83
+KEY: users_email, VAL: luis.rodriguez@example.com
+KEY: homes_id, VAL: faba52c5-7059-4811-abf7-856ee64a22fa
+KEY: homes_state, VAL: NY
+KEY: homes_zip_code, VAL: 10001
+
+### Question:
+
+Who are all the users who live in the state of NY?
