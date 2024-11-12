@@ -56,7 +56,7 @@ func run() error {
 		return nil
 	}
 
-	fmt.Print("Give me a second...\n\n")
+	fmt.Print("\nGive me a second...\n\n")
 
 	// -------------------------------------------------------------------------
 
