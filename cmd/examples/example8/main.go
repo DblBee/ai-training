@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/ardanlabs/ai-training/foundation/sqldb"
@@ -65,17 +66,21 @@ func run() error {
 	}
 
 	fmt.Println("QUERY:")
+	fmt.Print("-----------------------------------------------\n\n")
 	fmt.Println(query)
 	fmt.Print("\n")
 
 	// -------------------------------------------------------------------------
 
-	results := []map[string]any{}
-	if err := sqldb.QueryMap(ctx, db, query, &results); err != nil {
+	data := []map[string]any{}
+	if err := sqldb.QueryMap(ctx, db, query, &data); err != nil {
 		return fmt.Errorf("execQuery: %w", err)
 	}
 
-	for i, m := range results {
+	fmt.Println("DATA:")
+	fmt.Print("-----------------------------------------------\n\n")
+
+	for i, m := range data {
 		fmt.Printf("RESULT: %d\n", i+1)
 		for k, v := range m {
 			fmt.Printf("KEY: %s, VAL: %v\n", k, v)
@@ -85,12 +90,25 @@ func run() error {
 
 	// -------------------------------------------------------------------------
 
+	answer, err := getResponse(ctx, question, data)
+	if err != nil {
+		return fmt.Errorf("getQuery: %w", err)
+	}
+
+	fmt.Println("ANSWER:")
+	fmt.Print("-----------------------------------------------\n\n")
+	fmt.Println(answer)
+	fmt.Print("\n")
+
 	return nil
 }
 
 var (
 	//go:embed prompts/query.txt
 	query string
+
+	//go:embed prompts/response.txt
+	response string
 )
 
 func getQuery(ctx context.Context, question string) (string, error) {
@@ -102,6 +120,33 @@ func getQuery(ctx context.Context, question string) (string, error) {
 	}
 
 	prompt := fmt.Sprintf(query, question)
+
+	result, err := llm.Call(ctx, prompt)
+	if err != nil {
+		return "", fmt.Errorf("call: %w", err)
+	}
+
+	return result, nil
+}
+
+func getResponse(ctx context.Context, question string, data []map[string]any) (string, error) {
+
+	// Open a connection with ollama to access the model.
+	llm, err := ollama.New(ollama.WithModel("llama3.2"))
+	if err != nil {
+		return "", fmt.Errorf("ollama: %w", err)
+	}
+
+	var builder strings.Builder
+	for i, m := range data {
+		builder.WriteString(fmt.Sprintf("RESULT: %d\n", i+1))
+		for k, v := range m {
+			builder.WriteString(fmt.Sprintf("KEY: %s, VAL: %v\n", k, v))
+		}
+		builder.WriteString("\n")
+	}
+
+	prompt := fmt.Sprintf(response, builder.String(), question)
 
 	result, err := llm.Call(ctx, prompt)
 	if err != nil {
