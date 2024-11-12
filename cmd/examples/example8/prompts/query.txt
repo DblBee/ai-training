@@ -9,7 +9,6 @@ Adhere to these rules:
 -- When creating a ratio, always cast the numerator as float.
 -- Do not use the COALESCE function.
 -- Do not explain your answer.
--- Include all tables and all fields as provided in the Output.
 
 ### Input:
 
@@ -61,23 +60,20 @@ CREATE TABLE homes (
 
 -- products.user_id can be joined with users.user_id
 -- homes.user_id can be joined with users.user_id
--- view_products.user_id can be joined with users.user_id 
+-- view_products.user_id can be joined with users.user_id
 
-This is the SQL SELECT, FROM, and JOIN clauses you will use to produce a query for the answer:
+-- When joining tables use this format:
 
-```sql
 SELECT
     users.user_id AS users_id, users.name AS users_name, users.email AS users_email, users.roles AS users_roles, users.department AS users_department,
-    products.product_id AS products_id, products.user_id AS products_user_id, products.name AS products_name, products.cost AS products_cost, products.quantity AS products_quantity,
-    homes.home_id AS homes_id, homes.type AS homes_type, homes.user_id AS homes_user_id, homes.address_1 AS homes_address_1, homes.city AS homes_city, homes.state AS homes_state, homes.zip_code AS homes_zip_code, homes.country AS homes_country
+    products.product_id AS products_id, products.user_id AS products_user_id, products.name AS products_name, products.cost AS products_cost, products.quantity AS products_quantity, products.date_created AS products_date_created, products.date_updated AS products_date_updated,
+    homes.home_id AS homes_id, homes.type AS homes_type, homes.user_id AS homes_user_id, homes.address_1 AS homes_address_1, homes.city AS homes_city, homes.state AS homes_state, homes.zip_code AS homes_zip_code, homes.country AS homes_country, homes.date_created AS homes_date_created, homes.date_updated AS homes_date_updated
 FROM
     users
 JOIN
     products ON users.user_id = products.user_id
 JOIN
     homes ON users.user_id = homes.user_id
-WHERE
-```
 
 ### Question:
 

@@ -3,12 +3,11 @@ and the count of products.
 
 // =============================================================================
 
-What is the total cost of all products for Luis Rodriguez?
-Include the quantity when calculating the cost.
+What is the total cost of all products for Luis Rodriguez? Include the quantity when calculating the cost.
 
 // =============================================================================
 
-Find me all the users who have a home in the state of NY?
+Find me all the users who have a home in the state of CA?
 
 // =============================================================================
 

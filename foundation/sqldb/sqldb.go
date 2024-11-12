@@ -262,7 +262,7 @@ func namedQueryStruct(ctx context.Context, db sqlx.ExtContext, query string, dat
 }
 
 // QueryMap executes a query and places results into a map.
-func QueryMap(ctx context.Context, db sqlx.ExtContext, query string, dest map[string]any) (err error) {
+func QueryMap(ctx context.Context, db sqlx.ExtContext, query string, dest *[]map[string]any) (err error) {
 	var rows *sqlx.Rows
 
 	rows, err = sqlx.NamedQueryContext(ctx, db, query, struct{}{})
@@ -276,12 +276,13 @@ func QueryMap(ctx context.Context, db sqlx.ExtContext, query string, dest map[st
 
 	defer rows.Close()
 
-	if !rows.Next() {
-		return ErrDBNotFound
-	}
+	for rows.Next() {
+		m := map[string]any{}
+		if err := rows.MapScan(m); err != nil {
+			return err
+		}
 
-	if err := rows.MapScan(dest); err != nil {
-		return err
+		*dest = append(*dest, m)
 	}
 
 	return nil

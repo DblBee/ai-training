@@ -70,16 +70,18 @@ func run() error {
 
 	// -------------------------------------------------------------------------
 
-	results := map[string]any{}
-	if err := sqldb.QueryMap(ctx, db, query, results); err != nil {
+	results := []map[string]any{}
+	if err := sqldb.QueryMap(ctx, db, query, &results); err != nil {
 		return fmt.Errorf("execQuery: %w", err)
 	}
 
-	fmt.Println("RESULT:")
-	for k, v := range results {
-		fmt.Printf("KEY: %s, VAL: %v\n", k, v)
+	for i, m := range results {
+		fmt.Printf("RESULT: %d\n", i+1)
+		for k, v := range m {
+			fmt.Printf("KEY: %s, VAL: %v\n", k, v)
+		}
+		fmt.Print("\n")
 	}
-	fmt.Print("\n")
 
 	// -------------------------------------------------------------------------
 
