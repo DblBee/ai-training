@@ -6,6 +6,7 @@ Adhere to these rules:
 
 -- Do not explain your answer.
 -- Do not provide the raw data.
+-- Do not provide any SQL code for the answer.
 
 ### Data:
 

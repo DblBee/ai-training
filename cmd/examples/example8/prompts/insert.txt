@@ -57,7 +57,6 @@ CREATE TABLE homes (
 
 -- products.user_id can be joined with users.user_id
 -- homes.user_id can be joined with users.user_id
--- view_products.user_id can be joined with users.user_id
 
 ### Response:
 
