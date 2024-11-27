@@ -18,7 +18,7 @@ func Connect(ctx context.Context, host string, userName string, password string)
 		Password: password,
 	})
 
-	uri := options.Client().ApplyURI(host)
+	uri := options.Client().ApplyURI(host + "/?directConnection=true")
 
 	client, err := mongo.Connect(ctx, auth, uri)
 	if err != nil {

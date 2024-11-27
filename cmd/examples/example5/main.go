@@ -7,7 +7,7 @@
 //
 // # This requires running the following command:
 //
-//  $ make dev-ollama-up // This starts the Ollama service.
+//  $ make ollama-up  // This starts the Ollama service.
 
 package main
 

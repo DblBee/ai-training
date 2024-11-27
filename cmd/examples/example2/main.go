@@ -7,8 +7,7 @@
 //
 // # This requires running the following commands:
 //
-//	$ make dev-up        // This starts MongoDB and OpenWebIU in docker compose.
-//  $ make dev-ollama-up // This starts the Ollama service.
+//  $ make ollama-up  // This starts the Ollama service.
 //
 // # Extra reading and watching:
 //

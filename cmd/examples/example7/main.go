@@ -160,16 +160,17 @@ func questionResponse(ctx context.Context, question string, results []searchResu
 	// Format a prompt to direct the model what to do with the content and
 	// the question.
 	prompt := `Use the following pieces of information to answer the user's question.
-	If you don't know the answer, say that you don't know.
 	
-	Context: %s
+If you don't know the answer, say that you don't know.	
+
+Answer the question and provide additional helpful information.
+
+Responses should be properly formatted to be easily read.
 	
-	Question: %s
-
-	Answer the question and provide additional helpful information.
-
-	Responses should be properly formatted to be easily read.
-	`
+Context: %s
+	
+Question: %s
+`
 
 	var wordCount int
 	var chunks strings.Builder

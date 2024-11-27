@@ -8,7 +8,7 @@
 //
 // # This requires running the following command:
 //
-//	$ make dev-up // This starts MongoDB in docker compose.
+//	$ make compose-up // This starts MongoDB and OpenWebIU in docker compose.
 //
 // # You can use this command to open a prompt to mongodb:
 //
