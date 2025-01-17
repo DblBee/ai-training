@@ -3,6 +3,14 @@ SHELL_PATH = /bin/ash
 SHELL = $(if $(wildcard $(SHELL_PATH)),/bin/ash,/bin/bash)
 
 # ==============================================================================
+# Remove Ollama Auto-Run
+#
+# We have discovered that Ollama is installing itself to run at login on all OS. 
+# To remove this on the Mac go to `Settings/General/Login Items & Extensions`
+# and remove Ollama as a starup item. Then navigate to `~/Library/LaunchAgents`
+# and remove the Ollama file you will find.
+
+# ==============================================================================
 # Mongo support
 #
 # db.book.find({id: 300})
