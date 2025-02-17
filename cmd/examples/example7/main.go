@@ -9,9 +9,9 @@
 //
 // # This requires running the following commands:
 //
-//  $ make dev-up        // This starts MongoDB and OpenWebIU in docker compose.
-//  $ make dev-ollama-up // This starts the Ollama service.
-//	$ make example6      // This creates the book.embeddings file
+//  $ make compose-up // This starts MongoDB and OpenWebIU in docker compose.
+//  $ make ollama-up  // This starts the Ollama service.
+//	$ make example6   // This creates the book.embeddings file
 
 package main
 

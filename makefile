@@ -54,7 +54,7 @@ install:
 docker:
 	docker pull mongodb/mongodb-atlas-local
 	docker pull dyrnq/open-webui:main
-	docker pull postgres:16.4
+	docker pull postgres:17.3
 
 ollama-pull:
 	ollama pull mxbai-embed-large
