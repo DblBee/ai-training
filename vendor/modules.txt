@@ -6,7 +6,7 @@ code.sajari.com/docconv/v2/snappy
 # github.com/JalfResi/justext v0.0.0-20221106200834-be571e3e3052
 ## explicit
 github.com/JalfResi/justext
-# github.com/PuerkitoBio/goquery v1.10.1
+# github.com/PuerkitoBio/goquery v1.10.2
 ## explicit; go 1.23
 github.com/PuerkitoBio/goquery
 # github.com/advancedlogic/GoOse v0.0.0-20231203033844-ae6b36caf275
@@ -71,12 +71,13 @@ github.com/jaytaylor/html2text
 ## explicit; go 1.10
 github.com/jmoiron/sqlx
 github.com/jmoiron/sqlx/reflectx
-# github.com/klauspost/compress v1.17.11
-## explicit; go 1.21
+# github.com/klauspost/compress v1.18.0
+## explicit; go 1.22
 github.com/klauspost/compress
 github.com/klauspost/compress/fse
 github.com/klauspost/compress/huff0
 github.com/klauspost/compress/internal/cpuinfo
+github.com/klauspost/compress/internal/le
 github.com/klauspost/compress/internal/snapref
 github.com/klauspost/compress/zstd
 github.com/klauspost/compress/zstd/internal/xxhash
@@ -114,7 +115,7 @@ github.com/rivo/uniseg
 # github.com/ssor/bom v0.0.0-20170718123548-6386211fdfcf
 ## explicit
 github.com/ssor/bom
-# github.com/tmc/langchaingo v0.1.12
+# github.com/tmc/langchaingo v0.1.13
 ## explicit; go 1.22.0
 github.com/tmc/langchaingo/callbacks
 github.com/tmc/langchaingo/llms
@@ -133,7 +134,7 @@ github.com/xdg-go/stringprep
 # github.com/youmark/pkcs8 v0.0.0-20240726163527-a2c0da244d78
 ## explicit; go 1.17
 github.com/youmark/pkcs8
-# go.mongodb.org/mongo-driver v1.17.2
+# go.mongodb.org/mongo-driver v1.17.3
 ## explicit; go 1.18
 go.mongodb.org/mongo-driver/bson
 go.mongodb.org/mongo-driver/bson/bsoncodec
@@ -182,8 +183,8 @@ go.mongodb.org/mongo-driver/x/mongo/driver/operation
 go.mongodb.org/mongo-driver/x/mongo/driver/session
 go.mongodb.org/mongo-driver/x/mongo/driver/topology
 go.mongodb.org/mongo-driver/x/mongo/driver/wiremessage
-# golang.org/x/crypto v0.33.0
-## explicit; go 1.20
+# golang.org/x/crypto v0.35.0
+## explicit; go 1.23.0
 golang.org/x/crypto/ocsp
 golang.org/x/crypto/pbkdf2
 golang.org/x/crypto/scrypt
