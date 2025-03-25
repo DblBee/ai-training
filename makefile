@@ -42,6 +42,9 @@ example7:
 example8:
 	go run cmd/examples/example8/main.go
 
+example9:
+	go run cmd/examples/example9/main.go
+
 # ==============================================================================
 # Install dependencies
 
@@ -60,6 +63,7 @@ ollama-pull:
 	ollama pull mxbai-embed-large
 	ollama pull llama3.2
 	ollama pull gemma2:27b
+	ollama pull llama3.2-vision
 
 # ==============================================================================
 # Manage project
