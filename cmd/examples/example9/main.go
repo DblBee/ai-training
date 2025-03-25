@@ -22,8 +22,6 @@ import (
 	exifcommon "github.com/dsoprea/go-exif/v3/common"
 	jpg "github.com/dsoprea/go-jpeg-image-structure/v2"
 	pis "github.com/dsoprea/go-png-image-structure/v2"
-	tiff "github.com/dsoprea/go-tiff-image-structure/v2"
-	riimage "github.com/dsoprea/go-utility/v2/image"
 	"github.com/tmc/langchaingo/llms"
 	"github.com/tmc/langchaingo/llms/ollama"
 )
@@ -35,14 +33,14 @@ func main() {
 }
 
 func run() error {
-	fileName := "/Users/bill/Downloads/samples/roseimg.png"
+	fileName := "cmd/samples/roseimg.png"
 
 	data, err := readImage(fileName)
 	if err != nil {
 		return fmt.Errorf("read image: %w", err)
 	}
 
-	prompt := "describe the image in as few words as possible"
+	prompt := "Describe the image and be concise and accurate."
 
 	var mimeType string
 	switch filepath.Ext(fileName) {
@@ -50,8 +48,6 @@ func run() error {
 		mimeType = "image/jpg"
 	case ".png":
 		mimeType = "image/png"
-	case ".tiff:", ".tif":
-		mimeType = "image/tiff"
 	default:
 		return fmt.Errorf("unsupported file type: %s", filepath.Ext(fileName))
 	}
@@ -123,41 +119,56 @@ func updateImage(fileName string, description string) error {
 
 	// -------------------------------------------------------------------------
 
-	var intfc riimage.MediaContext
-
 	switch filepath.Ext(fileName) {
 	case ".jpg", ".jpeg":
-		intfc, err = jpg.NewJpegMediaParser().ParseFile(fileName)
+		intfc, err := jpg.NewJpegMediaParser().ParseFile(fileName)
+		if err != nil {
+			return fmt.Errorf("parse file: %w", err)
+		}
+
+		cs := intfc.(*jpg.SegmentList)
+		err = cs.SetExif(ib)
+		if err != nil {
+			return fmt.Errorf("set ib: %w", err)
+		}
+
+		f, err := os.Create(fileName)
+		if err != nil {
+			return fmt.Errorf("create: %w", err)
+		}
+
+		err = cs.Write(f)
+		if err != nil {
+			return fmt.Errorf("wrtite: %w", err)
+		}
+		defer f.Close()
+
 	case ".png":
-		intfc, err = pis.NewPngMediaParser().ParseFile(fileName)
-	case ".tiff:", ".tif":
-		intfc, err = tiff.NewTiffMediaParser().ParseFile(fileName)
+		intfc, err := pis.NewPngMediaParser().ParseFile(fileName)
+		if err != nil {
+			return fmt.Errorf("parse file: %w", err)
+		}
+
+		cs := intfc.(*pis.ChunkSlice)
+		err = cs.SetExif(ib)
+		if err != nil {
+			return fmt.Errorf("set ib: %w", err)
+		}
+
+		f, err := os.Create(fileName)
+		if err != nil {
+			return fmt.Errorf("create: %w", err)
+		}
+
+		err = cs.WriteTo(f)
+		if err != nil {
+			return fmt.Errorf("wrtite: %w", err)
+		}
+		defer f.Close()
+
 	default:
 		return fmt.Errorf("unsupported file type: %s", filepath.Ext(fileName))
 	}
-
-	if err != nil {
-		return fmt.Errorf("parse file: %w", err)
-	}
-
-	cs := intfc.(*pis.ChunkSlice)
-	err = cs.SetExif(ib)
-	if err != nil {
-		return fmt.Errorf("set ib: %w", err)
-	}
-
-	// -------------------------------------------------------------------------
-
-	f, err := os.Create(fileName)
-	if err != nil {
-		return fmt.Errorf("create: %w", err)
-	}
-
-	err = cs.WriteTo(f)
-	if err != nil {
-		return fmt.Errorf("wrtite: %w", err)
-	}
-	defer f.Close()
 
 	return nil
 }
