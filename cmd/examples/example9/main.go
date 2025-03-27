@@ -83,7 +83,7 @@ func run() error {
 
 	// -------------------------------------------------------------------------
 
-	fmt.Printf("Updarting Image description: %s\n", cr.Choices[0].Content)
+	fmt.Printf("Updating Image description: %s\n", cr.Choices[0].Content)
 
 	return updateImage(fileName, cr.Choices[0].Content)
 }
